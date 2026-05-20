@@ -80,18 +80,18 @@
 
     /* ABOUT */
     #about { background: var(--bg2); }
-    .about-layout { display: grid; grid-template-columns: 3fr 2fr; gap: 6rem; align-items: start; }
+    .about-layout { display: grid; grid-template-columns: 3fr 1.5fr; gap: 4rem; align-items: start; }
     .about-text p { color: #9090a0; font-size: 1.05rem; line-height: 2; margin-bottom: 1.75rem; }
     .about-text p strong { color: var(--white); font-weight: 500; }
 
     /* PHOTO */
-    .photo-frame { position: relative; width: 100%; margin-bottom: 2.5rem; }
-    .photo-frame img { width: 100%; display: block; filter: grayscale(15%) contrast(1.05); transition: filter 0.5s; }
+    .photo-frame { position: relative; width: 220px; height: 220px; margin-bottom: 2rem; flex-shrink: 0; }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; filter: grayscale(15%) contrast(1.05); transition: filter 0.5s; }
     .photo-frame:hover img { filter: grayscale(0%) contrast(1.05); }
-    .photo-frame::before { content: ""; position: absolute; inset: -8px; border: 1px solid var(--border); pointer-events: none; z-index: 1; transition: border-color 0.4s; }
+    .photo-frame::before { content: ""; position: absolute; inset: -6px; border: 1px solid var(--border); pointer-events: none; z-index: 1; transition: border-color 0.4s; }
     .photo-frame:hover::before { border-color: var(--gold); }
-    .photo-frame::after { content: ""; position: absolute; bottom: -12px; right: -12px; width: 55%; height: 55%; background: var(--gold-dim); z-index: -1; }
-    .about-right-inner { display: flex; flex-direction: column; align-items: flex-start; }
+    .photo-frame::after { content: ""; position: absolute; bottom: -8px; right: -8px; width: 50%; height: 50%; background: var(--gold-dim); z-index: -1; }
+    .about-right-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
 
     .edu-card { background: var(--bg3); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; width: 100%; }
     .edu-card h4 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--gold); margin-bottom: 0.2rem; }
@@ -194,7 +194,48 @@
       .cursor-dot, .cursor-ring { display: none; }
     }
     @media (max-width: 600px) { .skills-layout { grid-template-columns: 1fr; } }
-  </style>
+  
+    /* CERT CAROUSEL */
+    #certifications { background: var(--bg); }
+    .carousel-wrap { position: relative; }
+    .carousel-track-outer { overflow: hidden; }
+    .carousel-track { display: flex; gap: 1.5rem; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); will-change: transform; }
+    .cert-slide { flex: 0 0 calc(33.333% - 1rem); background: var(--bg3); border: 1px solid var(--border); padding: 0; overflow: hidden; position: relative; transition: border-color 0.3s, transform 0.3s; cursor: pointer; }
+    .cert-slide:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .cert-slide-img { width: 100%; height: 220px; object-fit: cover; display: block; background: var(--bg2); }
+    .cert-slide-placeholder { width: 100%; height: 220px; background: var(--bg2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; }
+    .cert-slide-placeholder span { font-size: 2rem; opacity: 0.3; }
+    .cert-slide-placeholder p { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .cert-slide-info { padding: 1.25rem 1.5rem; }
+    .cert-slide-info h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .cert-slide-info p { font-size: 0.78rem; color: var(--muted); }
+    .carousel-controls { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; }
+    .carousel-btn { width: 44px; height: 44px; border: 1px solid var(--border); background: var(--bg2); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: background 0.3s, border-color 0.3s; }
+    .carousel-btn:hover { background: var(--bg3); border-color: var(--gold); }
+    .carousel-dots { display: flex; gap: 0.5rem; margin-left: 0.5rem; }
+    .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+    .carousel-dot.active { background: var(--gold); transform: scale(1.3); }
+
+    /* WORK SCREENSHOTS */
+    #work-screenshots { background: var(--bg2); }
+    .screenshots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .screenshot-card { background: var(--bg3); border: 1px solid var(--border); overflow: hidden; position: relative; transition: border-color 0.3s, transform 0.3s; cursor: pointer; }
+    .screenshot-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .screenshot-card.wide { grid-column: span 2; }
+    .screenshot-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .screenshot-placeholder { width: 100%; height: 220px; background: var(--bg2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; }
+    .screenshot-placeholder span { font-size: 2rem; opacity: 0.25; }
+    .screenshot-placeholder p { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .screenshot-label { padding: 1rem 1.25rem; border-top: 1px solid var(--border); }
+    .screenshot-label h4 { font-size: 0.85rem; font-weight: 500; color: var(--white); margin-bottom: 0.1rem; }
+    .screenshot-label p { font-size: 0.75rem; color: var(--muted); }
+
+    /* LIGHTBOX */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border: 1px solid var(--border); }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; color: var(--gold); font-size: 2rem; cursor: pointer; background: none; border: none; line-height: 1; }
+</style>
 </head>
 <body>
   <div class="cursor-dot" id="cursorDot"></div>
@@ -207,6 +248,8 @@
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Campaigns</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#work-screenshots">Work</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -379,6 +422,61 @@
     const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");});},{threshold:0.08});
     revealEls.forEach(el=>observer.observe(el));
     setTimeout(()=>revealEls.forEach(el=>el.classList.add("visible")),1500);
+
+    // Cert carousel
+    const track = document.getElementById('certTrack');
+    const slides = track ? track.querySelectorAll('.cert-slide') : [];
+    const dotsContainer = document.getElementById('certDots');
+    let currentSlide = 0;
+    const visibleCount = () => window.innerWidth < 700 ? 1 : window.innerWidth < 1000 ? 2 : 3;
+
+    function buildDots() {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      const total = Math.ceil(slides.length / visibleCount());
+      for (let i = 0; i < total; i++) {
+        const d = document.createElement('div');
+        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(d);
+      }
+    }
+    function updateDots() {
+      if (!dotsContainer) return;
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlide);
+      });
+    }
+    function goTo(idx) {
+      if (!track || slides.length === 0) return;
+      const vc = visibleCount();
+      const max = Math.ceil(slides.length / vc) - 1;
+      currentSlide = Math.max(0, Math.min(idx, max));
+      const slideWidth = slides[0].offsetWidth + 24;
+      track.style.transform = 'translateX(-' + (currentSlide * vc * slideWidth) + 'px)';
+      updateDots();
+    }
+    const prevBtn = document.getElementById('certPrev');
+    const nextBtn = document.getElementById('certNext');
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentSlide - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentSlide + 1));
+    buildDots();
+    window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+    // Lightbox for screenshots
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    document.querySelectorAll('.screenshot-card img, .cert-slide img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+    });
+    if (lightboxClose) lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+    if (lightbox) lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
   </script>
 </body>
 </html>
